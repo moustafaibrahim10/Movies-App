@@ -1,9 +1,9 @@
 
 import '../../modules/movies/domain/entites/movie.dart';
 
-// dummy : for test app and ui
+// dummy :  test ui
 List<Movie> moviesList = [
-  Movie(
+  const Movie(
     backdropPath: "/nmGWzTLMXy9x7mKd8NKPLmHtWGa.jpg",
     genreIds: const [
       14,

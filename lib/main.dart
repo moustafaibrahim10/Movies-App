@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movies_app/core/services/service_locator.dart';
 import 'package:movies_app/modules/movies/domain/entites/movie.dart';
 import 'package:movies_app/modules/movies/presentaion/screens/movies_screen.dart';
+import 'package:movies_app/test.dart';
 
 void main() {
   ServerLocator().init();
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const MoviesScreen(),
+      home: MoviesScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }

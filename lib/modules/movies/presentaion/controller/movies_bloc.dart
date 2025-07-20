@@ -9,21 +9,23 @@ import 'package:movies_app/modules/movies/presentaion/controller/movies_state.da
 
 class MoviesBloc extends Bloc<MoviesEvent, MoviesState> {
   final GetNowPlayingMoviesUseCase getNowPlayingMoviesUseCase;
+
   MoviesBloc(this.getNowPlayingMoviesUseCase) : super(MoviesState()) {
     on<GetNowPlayingMoviesEvent>((event, state) async {
+      final result = await getNowPlayingMoviesUseCase.execute();
 
-      final result =
-          await getNowPlayingMoviesUseCase.execute();
-      emit(MoviesState(nowPlayingState: RequestState.loaded));
-      print(result);
       result.fold(
-        (l) => MoviesState(
-          nowPlayingState: RequestState.error,
-          nowPlayingMessage: l.message,
+        (l) => emit(
+          MoviesState(
+            nowPlayingState: RequestState.error,
+            nowPlayingMessage: l.message,
+          ),
         ),
-        (r) => MoviesState(
-          nowPlayingState: RequestState.loaded,
-          nowPlayingMovies: r
+        (r) => emit(
+          MoviesState(
+            nowPlayingState: RequestState.loaded,
+            nowPlayingMovies: r,
+          ),
         ),
       );
     });
