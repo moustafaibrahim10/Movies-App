@@ -15,7 +15,7 @@ class MovieDetailsModel extends MovieDetail {
 
   factory MovieDetailsModel.fromJson(Map<String, dynamic> json) =>
       MovieDetailsModel(
-        backdropPath: json['backdrop_path'],
+        backdropPath: json['backdrop_path'] ?? "/8J6UlIFcU7eZfq9iCLbgc8Auklg.jpg",
         id: json["id"],
         genres: List<GenresModel>.from(
           json["genres"].map((x) => GenresModel.fromJson(x)),

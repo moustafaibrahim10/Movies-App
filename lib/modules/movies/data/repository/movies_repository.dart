@@ -49,7 +49,7 @@ class MoviesRepository extends BaseMoviesRepository {
   }
 
   @override
-  Future<Either<Failure, List<MovieDetail>>> getMoviesDetails(
+  Future<Either<Failure, MovieDetail>> getMoviesDetails(
     MovieDetailsParameters parameter,
   ) async {
     final result = await baseMovieRemoteDataSource.getMovieDetails(parameter);

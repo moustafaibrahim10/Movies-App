@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movies_app/core/utils/app_strings.dart';
 import 'package:movies_app/modules/movies/presentaion/components/get_now_playing_components.dart';
 import 'package:movies_app/modules/movies/presentaion/components/get_top_rated_components.dart';
 import 'package:movies_app/modules/movies/presentaion/controller/movies_bloc.dart';
@@ -22,7 +23,6 @@ class MoviesScreen extends StatelessWidget {
                 ..add(GetPopularMoviesEvent())
                 ..add(GetTopRatedMoviesEvent()),
       child: Scaffold(
-        backgroundColor: Colors.grey.shade900,
         body: SingleChildScrollView(
           key: const Key('movieScrollView'),
           child: Column(
@@ -35,7 +35,7 @@ class MoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Popular",
+                      AppStrings.popular,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
@@ -52,7 +52,7 @@ class MoviesScreen extends StatelessWidget {
                         child: Row(
                           children: const [
                             Text(
-                              'See More',
+                              AppStrings.seeMore,
                               style: TextStyle(color: Colors.white),
                             ),
                             Icon(
@@ -74,7 +74,7 @@ class MoviesScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Top Rated",
+                      AppStrings.topRated,
                       style: GoogleFonts.poppins(
                         fontSize: 19,
                         fontWeight: FontWeight.w500,
@@ -91,7 +91,7 @@ class MoviesScreen extends StatelessWidget {
                         child: Row(
                           children: const [
                             Text(
-                              'See More',
+                              AppStrings.seeMore,
                               style: TextStyle(color: Colors.white),
                             ),
                             Icon(

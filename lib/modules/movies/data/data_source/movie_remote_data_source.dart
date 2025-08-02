@@ -1,12 +1,13 @@
 import 'package:dio/dio.dart';
 import 'package:movies_app/core/error/exceptions.dart';
-import 'package:movies_app/core/network/app_constants.dart';
+import 'package:movies_app/core/utils/app_constants.dart';
 import 'package:movies_app/modules/movies/data/models/movie_details_model.dart';
 import 'package:movies_app/modules/movies/data/models/movie_model.dart';
 import 'package:movies_app/modules/movies/data/models/recommendation_model.dart';
 import 'package:movies_app/modules/movies/domain/use_case/get_Movies_details_usecase.dart';
 import 'package:movies_app/modules/movies/domain/use_case/get_recommendation_usecase.dart';
 
+import '../../../../core/network/error_message_model.dart';
 import '../../domain/entites/recommendation.dart';
 
 abstract class BaseMovieRemoteDataSource {
@@ -16,7 +17,7 @@ abstract class BaseMovieRemoteDataSource {
 
   Future<List<MovieModel>> getTopRatedMovies();
 
-  Future<List<MovieDetailsModel>> getMovieDetails(MovieDetailsParameters parameter);
+  Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameter);
   Future<List<Recommendation>> getRecommendationMovies(RecommendationParameter parameter);
 }
 
@@ -59,15 +60,16 @@ class MovieRemoteDataSource extends BaseMovieRemoteDataSource {
   }
 
   @override
-  Future<List<MovieDetailsModel>> getMovieDetails(MovieDetailsParameters parameter) async {
+  Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameters parameter) async {
     final response = await Dio().get(ApiConstants.movieDetailsPath(parameter.movieId));
-    if(response.statusCode ==200)
-      return List<MovieDetailsModel>.from(response.data);
-    else
-      {
-        throw ServerException(errorMessageModel: response.data);
-      }
+
+    if (response.statusCode == 200) {
+      return MovieDetailsModel.fromJson(response.data);
+    } else {
+      throw ServerException(errorMessageModel: ErrorMessageModel.fromJson(response.data));
+    }
   }
+
   @override
   Future<List<RecommendationModel>> getRecommendationMovies(RecommendationParameter parameter)async{
     final response = await Dio().get(ApiConstants.recommendationPath(parameter.id));
